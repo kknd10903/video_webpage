@@ -1,0 +1,76 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Do+Hyeon&family=Gothic+A1&family=Orbit&family=Orbitron:wght@400..900&family=Poiret+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {font-family: "arial", "Alegreya Sans", "맑은 고딕", sans-serif;
+color: #999;}
+
+.container {width: 100%; height: 100vh; background-color: #333;
+ display: flex;}
+
+.header {width: 20%; height: 100vh; padding: 10vh 5vw; 
+ display: flex; flex-direction: column; justify-content: space-between;
+ position: relative; z-index: 5;} 
+/*컨테츠 박스가 뒤로 밀림에 따라 순서가 매우 중요 - 교재 참조 */
+
+.logo {display:flex; flex-direction:column; align-items:center; color: #fff;}
+.logo>i {font-size: 5vw; margin-bottom: 15px;}
+.logo>span {font-size: 15px;}
+.copy {font-size: 12px;}
+
+.main {width: 80%; height: 100vh; position: relative;}
+.btns {position: absolute; z-index: 10; top: 10vh; right: 5vw;
+ display: flex;}
+.btns>li {margin: 0 10px; color: #ddd; font-size: 18px;}
+/*작은 아이콘은 가변으로 사이즈 지정시 화면에 따라 더 작아질 수 있으니 고정 무방*/
+
+.contents {display: flex; justify-content: space-between;
+ height: 100vh; padding-top: 15vh; position: relative; z-index: 1;}
+
+ /*컨테츠 박스가 뒤로 밀림에 따라 순서가 매우 중요 - 교재 참조 
+ 마우스 오버시, 호버된 박스가 다른 박스 안에 들어가기 위함 */
+
+/* 박스가 늘어남에 따라 다른 박스가 보모상장 크기에 맞게 적당히 비율로 줄어듬
+즉, 플렉스 비로 조절이 가능 */
+.box {flex: 1; padding: 70px 40px 100px; opacity: 0.5; cursor: pointer;
+ position: relative; transition: opacity 1s, flex 1s;}
+
+.inner {width: 100%; height: 100%; display: flex; flex-direction: column;
+ justify-content: space-between; position: relative;}
+
+.box::before {content: ""; display: block; /* 인라인요소라 기본 사이즈 없음 */
+ width: 80%; height: 95%; background-color: #444; /*추후 그라데이션*/
+ position: absolute; top: 0; transition: all 1s; 
+ left: -200px; opacity: 0;}
+.box:hover {opacity: 1; flex:1.5; z-index: 2;}
+.box:hover::before {left: 0; opacity: 1;}
+
+
+.title {padding-top: 70px; transition: all 1s}
+.box:hover .title {padding-top: 0; width: 75%;}
+
+.title>p:nth-of-type(1) {font-family: "Alegreya Sans"; font-size: 38px;
+ font-weight: 300; color: #fff; transition: all 1s}
+.box:hover .title>p:nth-of-type(1) {font-size: 5vw; font-weight: 100;}
+
+.line {width: 40px; border-bottom: 2px solid #777; margin: 20px 0;
+ transition: all 1s;}
+.box:hover .line {width: 130px; border-bottom: 2px solid goldenrod}
+
+.title>p:nth-of-type(2) {font-size: 14px; color: #777;
+ line-height: 180%; transition: all 1s; width: 100%;}
+
+.title, .inner .title > p, .line {
+  /* [핵심] 하드웨어 가속 유도 및 미세한 떨림 방지 */
+  backface-visibility: hidden;
+  will-change: transform, opacity, font-size;
+  /* 텍스트 렌더링 최적화 */
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+.box figure {width: 100%; height: 15vh; overflow: hidden;
+ filter: saturate(10%); transition: all  1s;
+ box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.3);}
+.box figure>video {width: 100%; height: 100%; object-fit: cover;}
+.box:hover figure {height: 25vh; filter: saturate(120%);}
